@@ -1,0 +1,184 @@
+\section{ Задача 1 }
+
+\subsection{Условия задачи}
+
+Исходный объект описывается дифференциальным уравнением:
+\begin{equation}
+	\dddot{x} + \ddot{x} + 3\dot{x} + 3x = 2u_1 + 2u_2
+	\label{object}
+\end{equation}
+
+Даны следующие изопериметрические ограничения:
+\begin{eqnarray}
+	\label{isoper1}
+	\int_{t_0}^{t_1} \left( 4x_1 + 2x_2 + 2x_3 \right)dt = 0 \\
+	\label{isoper2}
+	\int_{t_0}^{t_1} \left( x_1 + 4x_2 + 4x_3 \right)dt = 0
+\end{eqnarray}
+
+Нужно оптимизировать следующий функционал при краевых условиях $\b{x}(t_0) = \b{x}_0$, $\b{x}(t_1) = \b{x}_1$:
+\begin{equation}
+	J(\b{x}, \b{u}) = \int_{t_0}^{t_1} \left( 2x_1^2 + 2x_2^2 + 3x_3^2 + 4u_1^2 + 3u_2^2 \right) dt \to \min_{\b{u}\in \mathbb{C}[t_0,\,t_1]}
+\end{equation}
+
+\subsection{Переход к задаче безусловной оптимизации}
+
+Запишем безусловное ограничение (\ref{object}) в виде системы уравнений Коши:
+\begin{equation}
+	\begin{cases}
+		\dot{x}_1 = x_2 \\
+		\dot{x}_2 = x_3 \\
+		\dot{x}_3 = -3x_1- 3x_2 -x_3 +2u_1 + 2u_2
+	\end{cases}
+	\label{object_cosh}
+\end{equation}
+
+Составим лагранжиан:
+\begin{multline}
+	\mathcal{L}(\b{x}, \dot{\b{x}}, \b{u}, \b{\lambda}, \b{p}) = \lambda_0 \left( 2 x_1^2 + 2x_2^2 + 3x_3^2 + 4u_1^2 + 3u_2^2 \right) + \lambda_1 \left( 4x_1 + 2x_2 + 2x_3 \right) + \lambda_2 \left( x_1 + 4x_2 + 4x_3 \right) +\\+ p_1 \left( \dot{x}_1 - x_2 \right) p_2 \left( \dot{x}_2 - x3 \right) + p_3 \left( \dot{x}_3 + 3x_1 + 3x_2 + x_3 + 2u_1 - 2u_2 \right)
+\end{multline}
+
+Запишем условие стационарности по $\b{x}$: $ \dot{\b{p}} = \pdv{\mathcal{L}}{\b{x}}$
+\begin{equation}
+	\begin{cases}
+		\dot{p}_1 = 4\lambda_0 x_1 + 4\lambda_1 + \lambda_2 + 3p_3 \\
+		\dot{p}_2 = 4\lambda_0 x_2 + 2\lambda_1 + 4\lambda_2 - p_1 + 3p_3 \\
+		\dot{p}_3 = 6\lambda_0 x_3 + 2\lambda_1 + 4\lambda_2 - p_2 + p_3
+	\end{cases}	
+\end{equation}
+
+Запишем условие стационарности по $\b{u}$: $\pdv{\mathcal{L}}{\b{u}} = \b{0}$
+\begin{equation}
+	\begin{cases}
+		8\lambda_0 u_1 - 2p_3 = 0 \\
+		6\lambda_0 u_2 - 2p_3 = 0
+	\end{cases}
+	\label{u_stat}
+\end{equation}
+
+Подставим исключим $\b{u}$ с помощью (\ref{u_stat}) из (\ref{object_cosh}). Получим систему дифференциальных уравнений в форме Коши, для определения оптимальной траектории:
+\begin{equation}
+	\begin{cases}
+		\dot{x}_1 = x_2 \\
+		\dot{x}_2 = x_3 \\
+		\dot{x}_3 = -3x_1- 3x_2 -x_3 +\frac{2p_3}{4\lambda_0} + \frac{2p_3}{3\lambda_0} \\
+		\dot{p}_1 = 4\lambda_0 x_1 + 4\lambda_1 + \lambda_2 + 3p_3 \\
+		\dot{p}_2 = 4\lambda_0 x_2 + 2\lambda_1 + 4\lambda_2 - p_1 + 3p_3 \\
+		\dot{p}_3 = 6\lambda_0 x_3 + 2\lambda_1 + 4\lambda_2 - p_2 + p_3
+	\end{cases}
+	\label{res_1}
+\end{equation}
+
+Решив (\ref{res_1}), получим оптимальное решение, зависящее от $\lambda_1,\,\lambda_2$. Для исключения этих переменных можно будет воспользоваться изопериметрическими ограничениями (\ref{isoper1})-(\ref{isoper2}).
+
+
+\section{Задача 2}
+
+\subsection{Условия задачи}
+
+Исходный объект описывается дифференциальным уравнением:
+\begin{equation}
+	\dddot{x} + 3\ddot{x} + 1\dot{x} + 3x = u_1 + 2u_2
+	\label{object2}
+\end{equation}
+
+Даны следующие изопериметрические ограничения:
+\begin{eqnarray}
+	\label{isoper21}
+	\int_{t_0}^{t_1} \left( x_1 + x_2 + 2x_3 \right)dt + 2t_1 + 3 + 5x_1(t_1) + 2x_2 (t_1) + x_3 (t_1) = 0 \\
+	\label{isoper22}
+	\int_{t_0}^{t_1} \left( 5x_1 + 2x_2 + x_3 \right)dt + 5t_1 + 2 + 3x_1(t_1) + x_2(t_1) + 3x_3(t_1) = 0
+\end{eqnarray}
+
+Нужно оптимизировать следующий функционал при краевых условиях $\b{x}(t_0) = \b{x}_0$:
+\begin{equation}
+	J(\b{x}, \b{u}) = \int_{t_0}^{t_1} \left( 5x_1^2 + x_2^2 + 2x_3^2 + u_1^2 + 2u_2^2 \right) dt + t_1 + 4 + 2x_1(t_1) + 4x_2(t_1) + 5x_3(t_1) \to \min_{\b{u}\in \mathbb{C}[t_0,\,t_1]}
+\end{equation}
+
+При этом значения $\b{x}(t_1),\,t_1$ -- неизвестны.
+
+\subsection{Переход к задаче безусловной оптимизации}
+
+Запишем описание объекта (\ref{object2}) в форме системы уравнений Коши:
+\begin{equation}
+	\begin{cases}
+		\dot{x}_1 = x_2 \\
+		\dot{x}_2 = x_3 \\
+		\dot{x}_3 = -3x_1 - x_2 -3x_3 + u_1 + 2u_2
+	\end{cases}
+	\label{cosh2}
+\end{equation}
+
+Терминант будет иметь вид:
+\begin{multline}
+	T = \lambda_0 \left( t_1 + 4 + 2x_1(t_1) + 4x_2(t_1) + 5x_3(t_1) \right) + \lambda_1 \left( 2t_1 + 3 + 5x_1(t_1) + 2x_2(t_1) + x_3(t_1) \right) + \\ + \lambda_2 \left( 5t_1 + 2 + 3x_1(t_1) + x_2(t_1) + 3x_3(t_1) \right)
+\end{multline}
+
+Составим лагранжиан:
+
+\begin{multline}
+	\mathcal{L}(\b{x},\dot{\b{x}}, \b{u}, \b{\lambda}, \b{p}) = \lambda_0 \left( 5x_1^2 + x_2^2 + 2x_3^2 + u_1^2 + 2u_2^2 \right) + \lambda_1 \left( x_1 + x_2 + 2x_3 \right) + \\ + \lambda_2 \left( 5x_1 + 2x_2 + x_3 \right) + p_1 \left( \dot{x}_1 - x_2 \right) + p_2 \left( \dot{x}_2 - x_3 \right) + p_3\left( \dot{x}_3 + 3x_1 + x_2 + 3x_3 - u_1 - 2u_2 \right)
+\end{multline}
+
+
+Оптимизируемый функционал будет выглядеть следующим образом:
+
+\begin{equation}
+	J_{\mathcal{L}} = \int_{t_0}^{t_1} \mathcal{L} dt + T
+\end{equation}
+
+Запишем условие стационарности по $\b{x}$, $\dot{\b{p}} = \pdv{\mathcal{L}}{\b{x}}$:
+
+\begin{equation}
+	\begin{cases}
+		\dot{p}_1 = 10\lambda_0 x_1 + \lambda_1 + 5\lambda_2 + 3p_3 \\
+		\dot{p}_2 = 2\lambda_0 x_2 + \lambda_1 + 2\lambda_2 - p_1 + p_3 \\
+		\dot{p}_3 = 4\lambda_0 x_3 + 2\lambda_1 + \lambda_2 - p_2 + 3p_3
+	\end{cases}
+\end{equation}
+
+Запишем условие стационарности по $\b{u}$, $\pdv{\mathcal{L}}{\b{u}} = \b{0}$:
+
+\begin{equation}
+	\begin{cases}
+		2\lambda_0 u_1 - p_3 = 0 \\
+		4\lambda_0 u_2 - 2p_3 = 0
+	\end{cases}
+	\label{stat_u}
+\end{equation}
+
+Так как правый конец является неизвестным, запишем для него условия трансверсальности, $\b{p}(t_1) = -\pdv{T}{\b{x}(t_1)}$:
+
+\begin{equation}
+	\begin{cases}
+		p_1(t_1) = -2\lambda_0 -5\lambda_1 -3\lambda_3 \\
+		p_2(t_1) = -4\lambda_0 -2\lambda_1 -\lambda_2 \\ 
+		p_3(t_1) = -5\lambda_0 -\lambda_1 -3\lambda_2
+	\end{cases}
+\end{equation}
+
+Условие стационарности по $t_1$, $\pdv{J_\mathcal{L}}{t_1} = 0$ будет иметь следующий вид:
+\begin{multline}
+	\lambda_0 G_0(t_1) + \lambda_1 G_1 (t_1) + \lambda_2 G_2 (t_1) + \lambda_0 \left[1 + 2\dot{x}_1(t_1) + 4\dot{x}_2(t_1) + 5\dot{x}_3(t_1) \right] + \\ + \lambda_1 \left[ 2 + 5\dot{x}_1 (t_1) + 2\dot{x}_2 (t_1) + \dot{x}_3 (t_1) \right] + \lambda_2 \left[ 5 + 3\dot{x}_1(t_1) + \dot{x}_2(t_1) + 3\dot{x}_3(t_1) \right] = 0
+\end{multline}
+
+Из (\ref{stat_u}) выразим оптимальное управление:
+
+\begin{equation}
+	\begin{cases}
+		u_1^{*} = \frac{p_3}{2\lambda_0} \\
+		u_2^{*} = \frac{p_3}{2\lambda_0}
+	\end{cases}
+\end{equation}
+
+Подставим его в безусловные ограничения (\ref{cosh2}):
+
+\begin{equation}
+	\begin{cases}
+		\dot{x}_1 = x_2 \\
+		\dot{x}_2 = x_3 \\
+		\dot{x}_3 = -3x_1 - x_2 -3x_3 + \frac{p_3}{2\lambda_0} + \frac{p_3}{\lambda_0}
+	\end{cases}
+\end{equation}
+
+С помощью этой системы, и условий записанных выше получим оптимальный процесс.
